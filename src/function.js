@@ -146,15 +146,15 @@ function winOrLoseJudge(reloadGameScreen){
 
     if(initMoney > Information.money){
         $('.WINORLOSE').html('LOSE');
-        historyDataStore('LOSE');
+        historyDataStore('LOSE', Information.money - initMoney);
     }
     else if(initMoney < Information.money){
         $('.WINORLOSE').html('WIN');
-        historyDataStore('WIN');
+        historyDataStore('WIN', Information.money - initMoney);
     }
     else{
         $('.WINORLOSE').html('TIE');
-        historyDataStore('TIE');
+        historyDataStore('TIE', Information.money - initMoney);
     }
 
     updateMoney();
@@ -257,13 +257,14 @@ function playerDataStore(){
     localStorage.setItem('PlayerData', JSON.stringify(localData));
 }
 
-function historyDataStore(winOrLose){
+function historyDataStore(winOrLose, profit){
     let historyData = {
         'winOrLose' : '',
         'totalBet' : 0,
         'hours' : 0,
         'minutes' : 0,
-        'seconds' : 0
+        'seconds' : 0, 
+        'profit' : 0
     }
     let totalBet = 0
 
@@ -276,6 +277,7 @@ function historyDataStore(winOrLose){
     historyData.hours = Math.floor(Information.hours);
     historyData.minutes = Math.floor(Information.minutes);
     historyData.seconds = Math.floor(Information.seconds);
+    historyData.profit = profit;
 
     console.log(historyData);
 

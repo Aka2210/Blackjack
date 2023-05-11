@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<!--
+AN4111071 葉治嘉 第四次作業 5/17
+AN4111071 Ye Zhijia The Second Homework 5/17
+-->
+
+<html>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <head>
+        <meta charset="utf-8">
+        <audio id="backGroundMusic" src="assets/sounds/Mastered.mp3"></audio>
+        <audio id="click" src="assets/sounds/split.mp3"></audio>
+        <audio id="timeOut" src="assets/sounds/9convert(mp3cut.net).mp3"></audio>
+        <link rel = "stylesheet" type = "text/css" href = "style/game.css">
+        <link rel = "stylesheet" type = "text/css" href = "style/initScreen.css">
+        <link rel = "stylesheet" type = "text/css" href = "style/gameScreen.css">
+        <link rel = "stylesheet" type = "text/css" href = "style/chooseGameScreen.css">
+        <link rel = "stylesheet" type = "text/css" href = "style/regularScreen.css">
+    </head>
+
+    <body>
+        <div class="initScreen Screen">
+            <div>
+                <div class= "Start button">
+                    <h1>Start</h1>
+                </div>
+
+                <div class="space">
+                </div>
+
+                <div class= "Regular button">
+                    <h1>Regulation</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeDisplay">
+        </div>
+
+        <div class="regularScreen Screen">
+            <div class= "regularDisplay">
+                <div class="regularSelf">
+                    <h3 class="regularTitle">基本規則</h3>
+
+                    <p class="regularContent">
+                        莊家給每個玩家發兩張牌，牌面朝上；給自己發兩張牌，一張牌面朝上，一張牌面朝下。
+                        K、Q、J 和 10 牌都算作 10 點。 A 牌既可算作1 點也可算作11 點，由玩家自己決定。其餘所有2 至9 牌均按其原面值計算。
+                        如果莊家的總點數等於或少於16 點將會補牌直到大於等於17點，且一旦大於17點則會立刻停牌。
+                        若雙方都為21點則莊家獲勝。
+                    </p>
+                </div>
+                <div class="regularSelf">
+                    <h3 class="regularTitle">21點術語</h3>
+
+                    <p class="regularContent">
+                        拿牌(HIT) ： 再拿一張牌<br>
+                        停牌(STAND) ： 不再拿牌 <br>
+                        分牌(SPLIT)： 玩家再下一注與原賭注相等的賭金，並將前兩張牌分為兩副單獨的牌，一局只能分牌一次。<br>
+                        投降(Surrender)：所有玩家尚未要牌時，可以投降，投降後玩家籌碼扣除賭金的一半(小數點無條件捨去)，並重新發牌切記分牌必須在兩張牌的點數相同時(即一對 8、一對 K 和一對 Q)才可分牌。 <br>
+                        雙倍下注(DOUBLE) ： 玩家在拿到前兩張牌之後，可以再下一注與原賭注相等的賭金(如果覺得少可以加倍)，然後最多只能再拿一張牌。<br>
+                    </p>
+                </div>
+
+                <div class="regularSelf">
+                    <h3 class="regularTitle">遊戲機制</h3>
+
+                    <p class="regularContent">
+                        總共208張牌也就是四副牌，隨機取一個1~208號的數字，每次抽取則下一次抽取範圍-1，
+                        若當次抽取的號碼比歷次抽取的號碼大，每大於一個號碼則當前號碼+1，
+                        最後再定位該號碼在第幾副牌第幾張(第 208/53 +1 號牌 第 208 - (208/53 * 52) 張牌)
+                        這樣就可以保證機率的公平性，每次抽取的每張牌機率都是(1/剩餘的牌)%。
+                        按下cheat按鍵後(籌碼畫面中間最下面的紅色按鈕)，莊家的牌必為21點。
+                        <!-- <img src="tool/RegularCuteImg.png"> -->
+                    </p>
+                </div>
+            </div>     
+
+            <div class= "RegularBack button">
+                Go Back
+            </div>
+
+            <img src="assets/images/icons/RegularCuteImg.png" class="regularImgPosition">
+        </div>
+
+        <div class="chooseGameScreen Screen">
+            <div class="status">
+                <div class="avart">
+                </div>
+
+                <div class="personalInformation">
+                    <div class="playerName">
+                        Anonymous
+                    </div>
+                    <div class="money">
+                        Money:1000K
+                    </div>
+                </div>
+
+                <div class="goBack">
+                    Back
+                </div>
+            </div>
+
+            <div class="gameContainer">
+                <div class="game">
+                    <div class="Blackjack">
+                    </div>
+                    <div class="gmaeName">
+                        Blackjack
+                    </div>
+                </div>
+
+                <div class="game">
+                    <div class="underConstruction">
+                    </div>
+                    <div class="gmaeName">
+                        Unfinished
+                    </div>
+                </div>
+
+                <div class="game">
+                    <div class="underConstruction">
+                    </div>
+                    <div class="gmaeName">
+                        Unfinished
+                    </div>
+                </div>
+
+                <div class="game">
+                    <div class="underConstruction">
+                    </div>
+                    <div class="gmaeName">
+                        Unfinished
+                    </div>
+                </div>
+            </div>
+
+            <div class="ChooseGameTips">
+                Please select the game you want to play
+            </div>
+        </div>
+
+        <div class="gameScreen Screen">
+            <div class="dealer">
+                <img src = "assets/images/pokers/poker.png" class="poker">
+                <img src = "assets/images/pokers/poker.png" class="poker">
+            </div>
+
+            <div class="dealerCards">
+                Dealer Cards
+            </div>
+
+            <div class="gameButton">
+                Please bet first!!!
+            </div>
+
+            <div class="player">
+                <div class="pokerPosition active">
+                    <img src = "assets/images/pokers/poker.png" class="poker">
+                    <img src = "assets/images/pokers/poker.png" class="poker">
+                </div>
+            </div>
+
+            <div class="playerCards">
+                Player Cards
+            </div>
+
+            <div class="playerInformation">
+                <img src = "assets/images/icons/avatarBoy.png">
+                <div class="betAndName">
+                    <div>
+                        Anonymous
+                    </div>
+                    <div class="gameMoney money">
+                        Money:1000K
+                    </div>
+                </div>
+                <div class="bet">
+                    <div>
+                        <img src = "assets/images/icons/poker-chip.png">
+                    </div>  
+                    <div class="betmoney">
+                        Put in 1K chips
+                    </div>
+                </div>
+            </div>
+
+            <div class="endScreen">
+                <div class="WINORLOSE">
+                    WIN
+                </div>
+                <div class="game">
+                    <div class="Blackjack">
+                    </div>
+                    <div class="endText">
+                        Click Continue, and it will automatically return to the game selection interface after ten seconds.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/script" src = "src/player.js"></script>
+        <script type="text/script" src = "src/function.js"></script>
+        <script type="module" src = "src/script.js"></script>
+        
+    </body>
+</html>

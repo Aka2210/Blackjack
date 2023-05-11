@@ -23,6 +23,7 @@ class pokers{
         this.maxPokers = 208;
         this.pokerRecord = [];
         this.pokerAmount = 208;
+        this.pokers = []
     }
 
     reset(){
@@ -72,6 +73,13 @@ class player{
 
 window.addEventListener('DOMContentLoaded', () => {
     let Data = localStorage.getItem('PlayerData');
+
+    for(let i = 1; i <= 52; i++){
+        let Img = $('<img>');
+        Img.attr('src', 'assets/images/pokers/poke_' + i + '.jpg');
+        Img.attr('class', 'poker');
+        MyModule.PokerStatus.pokers[i] = Img;
+    }
 
     if(Data === null || Data === undefined){
         let PlayerData = {

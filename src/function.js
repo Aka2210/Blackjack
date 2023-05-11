@@ -47,9 +47,8 @@ function addCard(who){
 }
 
 function displayCard(who){
-    let Img = $('<img>');
-    Img.attr('src', 'assets/images/pokers/poke_' + who.card[who.card.length - 1] + '.jpg');
-    Img.attr('class', 'poker');
+    let Img = PokerStatus.pokers[who.card[who.card.length - 1]];
+
     if(who === Dealer){
         $('.dealer').append(Img);
     }

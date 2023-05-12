@@ -282,25 +282,17 @@ function historyDataStore(winOrLose, profit){
     console.log(historyData);
 
     let localHistory = localStorage.getItem('HistoryData');
-    let sessionHistory = sessionStorage.getItem('HistoryData');
 
     if(localHistory === null || localHistory === undefined)
         localHistory = '[]';
     
-    if(sessionHistory === null || sessionHistory === undefined)
-        sessionHistory = '[]';
-    
-    let historyS = JSON.parse(sessionHistory);
     let historyL = JSON.parse(localHistory);
 
-    historyS.push(historyData);
     historyL.push(historyData);
 
     localHistory = JSON.stringify(historyL);
-    sessionHistory = JSON.stringify(historyS);
 
     localStorage.setItem('HistoryData', localHistory);
-    sessionStorage.setItem('HistoryData', sessionHistory);
 }
 
 function timeCalculator(){

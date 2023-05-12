@@ -41,6 +41,7 @@ $('.goBack').on('click', () => { //顯示主頁面
 
 $('.Blackjack').on('click', () => { //開始21點遊玩
     MyModule.resetGame(reloadGameScreen);
+    MyModule.displayTable(3, "tableContainer");
     nowHand = 0;
     clickSound[0].play();
     MyModule.NowScreenDisplay($('.gameScreen'));
@@ -85,6 +86,35 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
             $('.gameButton').css('font-size', '18px');
             $('.gameButton').css('font-weight', 'normal');
         })
+    })
+
+    $('.tableBTN').on('click', () => {      
+        let localHistory = localStorage.getItem('HistoryData');
+
+        $('.tableCloseBTN').on('click', () => {
+            $('.cover').css('display', 'none');
+            $('.tableContainer').css('display', 'block');
+        })
+
+        localHistory = JSON.parse(localHistory);
+        $('.cover').css('display', 'block');
+        $('.tableContainer').css('display', 'none');
+        MyModule.displayTable(localHistory.length, 'tableContainerCenter');
+
+        let totalProfit = 0;
+        
+        for(let i = 0; i < localHistory.length; i++){
+            totalProfit += localHistory[i].profit;
+        }
+
+        let dataTable = "<tr>";
+            dataTable += ("<td>Total Profit</td>");
+            dataTable += ("<td>--</td>");
+            dataTable += ("<td>--</td>");
+            dataTable += ("<td>" + totalProfit + "</td>");
+        dataTable += "<tr>";
+
+        $(".tableContainerCenter .tableContent").append(dataTable);     
     })
 
     $('.gameButton').on('click', (e) => {

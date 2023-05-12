@@ -2,7 +2,7 @@ import { player, pokers, dealer, information} from "./player.js";
 export {Player, Players, Dealer, PokerStatus, Information, NowScreenDisplay, musicPlay, closeImgDraggable
     , random, randomAdjustment, addCard, calculatePoints, displayCard, resetGame, initCardDisplay
     , winOrLoseJudge, dealWithAce, dealWithDealerCard, splitCardChange, nextHands, splitDetect
-    , updateMoney, calculateTotalChips, timeDisplay};
+    , updateMoney, calculateTotalChips, timeDisplay, displayTable};
 
 function musicPlay(){
     let backGroundMusic = $('#backGroundMusic')[0];
@@ -170,7 +170,7 @@ function winOrLoseJudge(reloadGameScreen){
     }
     else{
         let temp = setTimeout(() => {
-        alert('You are LOSE and the money goes to zero, the game restarts');
+        alert('You are LOSE and the money goes to zero, the game restart');
         localStorage.clear();location.reload();}, 1000);
         temp;
     }
@@ -261,7 +261,6 @@ function historyDataStore(winOrLose, profit){
     let historyData = {
         'winOrLose' : '',
         'totalBet' : 0,
-        'hours' : 0,
         'minutes' : 0,
         'seconds' : 0, 
         'profit' : 0
@@ -274,7 +273,6 @@ function historyDataStore(winOrLose, profit){
 
     historyData.totalBet = totalBet;
     historyData.winOrLose = winOrLose;
-    historyData.hours = Math.floor(Information.hours);
     historyData.minutes = Math.floor(Information.minutes);
     historyData.seconds = Math.floor(Information.seconds);
     historyData.profit = profit;
@@ -306,8 +304,27 @@ function historyDataStore(winOrLose, profit){
 function timeCalculator(){
     Information.seconds = ((Information.time % 60000) / 1000);
     Information.minutes = (Information.time / 60000);
-    Information.minutes = Information.minutes % 24;
-    Information.hours = Information.minutes / 24;
+}
+
+function displayTable(amount, who){
+    let localHistory = localStorage.getItem('HistoryData');
+    if(localHistory === null || localHistory === undefined)
+        return;
+    else{
+        $("." + who + " .history .tableContent").html("");
+        let dataTable = "", totalProfit = 0;
+        localHistory = JSON.parse(localHistory);
+        for(let i = 0; i < amount; i++){
+            dataTable = "<tr>"
+                dataTable += ("<td>" + localHistory[i].winOrLose + "</td>");
+                dataTable += ("<td>" + localHistory[i].totalBet + "</td>");
+                dataTable += ("<td>" + localHistory[i].minutes + " min : " + localHistory[i].seconds + " sec</td>");
+                dataTable += ("<td>" + localHistory[i].profit + "</td>");
+            dataTable += "<tr>"
+            $("." + who + " .history .tableContent").append(dataTable);
+            totalProfit += localHistory[i].profit;
+        }
+    }
 }
 
 const Players = [];

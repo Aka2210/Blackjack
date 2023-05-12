@@ -35,7 +35,7 @@ O 盡可能多的 jQuery (20%)
 O 使用 localStorage 和 sessionStorage 來存儲遊戲 (12%)
 O 將播放時間存儲到localStorage和sessionStorage（5%）
  根據每場比賽的籌碼或上場時間對您的記錄進行排序 (13%)
- 玩家可以通過表格讀取之前遊戲的記錄（10%）
+O 玩家可以通過表格讀取之前遊戲的記錄（10%）
  使用setinterval來提醒玩家（5%）
  隨機顯示一些廣告（10%）
  歡迎源代碼評論（10%）

@@ -71,7 +71,18 @@ class player{
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    let Data = localStorage.getItem('PlayerData');
+    let Data = localStorage.getItem('PlayerData'), idleSeconds = 0;
+
+    let idleTimeCalculation = setInterval(() => {
+        idleSeconds += 1;
+        $("html").on('mousemove', () => {
+            idleSeconds = 0;
+        })
+
+        if(idleSeconds === 60){
+            alert("Please do not idle for too long, please click OK to continue the game.")
+        }
+    }, 1000)
 
     for(let i = 1; i <= 52; i++){
         let Img = $('<img>');

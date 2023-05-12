@@ -280,8 +280,6 @@ function historyDataStore(winOrLose, profit){
     historyData.seconds = Math.floor(Information.seconds);
     historyData.profit = profit;
 
-    console.log(historyData);
-
     let localHistory = localStorage.getItem('HistoryData');
     let sessionHistory = sessionStorage.getItem('HistoryData');
 

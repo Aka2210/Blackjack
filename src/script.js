@@ -41,7 +41,23 @@ $('.goBack').on('click', () => { //顯示主頁面
 
 $('.Blackjack').on('click', () => { //開始21點遊玩
     MyModule.resetGame(reloadGameScreen);
-    MyModule.displayTable(3, "tableContainer");
+
+    $(".tableContainer .history .tableContent").html("");
+    let sessionHistory = sessionStorage.getItem('HistoryData');
+    sessionHistory = JSON.parse(sessionHistory);
+    if(sessionHistory === null || sessionHistory === undefined){
+        sessionHistory = [];
+    }
+    for(let i = sessionHistory.length > 3 ? (sessionHistory.length - 3) : 0; i < sessionHistory.length; i++){
+        let dataTable = "<tr>"
+            dataTable += ("<td>" + sessionHistory[i].winOrLose + "</td>");
+            dataTable += ("<td>" + sessionHistory[i].totalBet + "</td>");
+            dataTable += ("<td>" + sessionHistory[i].minutes + " min : " + sessionHistory[i].seconds + " sec</td>");
+            dataTable += ("<td>" + sessionHistory[i].profit + "</td>");
+        dataTable += "<tr>"
+        $(".tableContainer .history .tableContent").append(dataTable);
+    }
+
     nowHand = 0;
     clickSound[0].play();
     MyModule.NowScreenDisplay($('.gameScreen'));
@@ -99,6 +115,7 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
         localHistory = JSON.parse(localHistory);
         $('.cover').css('display', 'block');
         $('.tableContainer').css('display', 'none');
+        MyModule.sortTable();
         MyModule.displayTable(localHistory.length, 'tableContainerCenter');
 
         let totalProfit = 0;

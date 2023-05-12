@@ -180,9 +180,10 @@ function winOrLoseJudge(reloadGameScreen){
 
 function dealWithAce(who){
     if(who.points > 21 && who.ace > 0){
-        let temp = who.ace;
-        for(let i = 0; i < temp, who.points > 21, who.ace > 0; i++, who.ace--){
+        for(; who.ace > 0; who.ace--){
             who.points -= 10;
+            if(who.points <= 21)
+                break;
         }
     }
     else
@@ -282,17 +283,24 @@ function historyDataStore(winOrLose, profit){
     console.log(historyData);
 
     let localHistory = localStorage.getItem('HistoryData');
+    let sessionHistory = sessionStorage.getItem('HistoryData');
 
     if(localHistory === null || localHistory === undefined)
         localHistory = '[]';
-    
+    if(sessionHistory === null || sessionHistory === undefined)
+        sessionHistory = '[]';
+
     let historyL = JSON.parse(localHistory);
+    let historyS = JSON.parse(sessionHistory);
 
     historyL.push(historyData);
+    historyS.push(historyData);
 
     localHistory = JSON.stringify(historyL);
+    sessionHistory = JSON.stringify(historyS);
 
     localStorage.setItem('HistoryData', localHistory);
+    sessionStorage.setItem('HistoryData', sessionHistory);
 }
 
 function timeCalculator(){
@@ -305,7 +313,6 @@ function displayTable(amount, who){
     if(localHistory === null || localHistory === undefined)
         return;
     else{
-        sortTable();
         $("." + who + " .history .tableContent").html("");
         let dataTable = "", totalProfit = 0;
         localHistory = JSON.parse(localHistory);

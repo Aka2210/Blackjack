@@ -188,15 +188,12 @@
     left: 0px;
     margin-top: 10px;
     border: 5px solid rgb(150, 5, 5);
-    height: fit-content;
+    height: 300px;
+    overflow-y: scroll;
     width: 30%;
-}
-
-.tableContainerCenter{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: fit-content;
     background-color: #6b0f1a;
     z-index: 100;
 }

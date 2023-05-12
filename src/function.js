@@ -2,7 +2,7 @@ import { player, pokers, dealer, information} from "./player.js";
 export {Player, Players, Dealer, PokerStatus, Information, NowScreenDisplay, musicPlay, closeImgDraggable
     , random, randomAdjustment, addCard, calculatePoints, displayCard, resetGame, initCardDisplay
     , winOrLoseJudge, dealWithAce, dealWithDealerCard, splitCardChange, nextHands, splitDetect
-    , updateMoney, calculateTotalChips, timeDisplay, displayTable};
+    , updateMoney, calculateTotalChips, timeDisplay, displayTable, sortTable};
 
 function musicPlay(){
     let backGroundMusic = $('#backGroundMusic')[0];
@@ -305,6 +305,7 @@ function displayTable(amount, who){
     if(localHistory === null || localHistory === undefined)
         return;
     else{
+        sortTable();
         $("." + who + " .history .tableContent").html("");
         let dataTable = "", totalProfit = 0;
         localHistory = JSON.parse(localHistory);
@@ -322,6 +323,21 @@ function displayTable(amount, who){
             totalProfit += localHistory[i].profit;
         }
     }
+}
+
+function sortTable(){
+    let localHistory = localStorage.getItem('HistoryData');
+    if(localHistory === null || localHistory === undefined)
+        return;
+    localHistory = JSON.parse(localHistory);
+
+    localHistory.sort((a, b) => {
+        return b.profit - a.profit;
+    })
+    
+    localHistory = JSON.stringify(localHistory);
+
+    localStorage.setItem('HistoryData', localHistory);
 }
 
 const Players = [];

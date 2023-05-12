@@ -110,6 +110,8 @@ function initCardDisplay(who){
 function winOrLoseJudge(reloadGameScreen){
     $('.dealer .poker').eq(0).attr('src', 'assets/images/pokers/poke_' + Dealer.card[0] + '.jpg');
     
+    $('.tableBTN').off();
+
     calculatePoints(Dealer);
     let initMoney = Information.money;
 
@@ -314,6 +316,9 @@ function displayTable(amount, who){
         $("." + who + " .history .tableContent").html("");
         let dataTable = "", totalProfit = 0;
         localHistory = JSON.parse(localHistory);
+        if(localHistory.length < 3)
+            amount = localHistory.length;
+
         for(let i = 0; i < amount; i++){
             dataTable = "<tr>"
                 dataTable += ("<td>" + localHistory[i].winOrLose + "</td>");

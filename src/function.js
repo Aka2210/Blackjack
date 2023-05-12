@@ -310,11 +310,12 @@ function timeCalculator(){
 
 function displayTable(amount, who){
     let localHistory = localStorage.getItem('HistoryData');
-    if(localHistory === null || localHistory === undefined)
+    if(localHistory === null || localHistory === undefined){
         return;
+    }
     else{
         $("." + who + " .history .tableContent").html("");
-        let dataTable = "", totalProfit = 0;
+        let dataTable = "";
         localHistory = JSON.parse(localHistory);
         if(localHistory.length < 3)
             amount = localHistory.length;
@@ -327,7 +328,6 @@ function displayTable(amount, who){
                 dataTable += ("<td>" + localHistory[i].profit + "</td>");
             dataTable += "<tr>"
             $("." + who + " .history .tableContent").append(dataTable);
-            totalProfit += localHistory[i].profit;
         }
     }
 }

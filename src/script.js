@@ -106,16 +106,45 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
 
     $('.tableBTN').on('click', () => {      
         let localHistory = localStorage.getItem('HistoryData');
+        localHistory = JSON.parse(localHistory);
 
         $('.tableCloseBTN').on('click', () => {
             $('.cover').css('display', 'none');
             $('.tableContainer').css('display', 'block');
         })
 
-        localHistory = JSON.parse(localHistory);
+        $('.tableClearBTN').on('click', () => {
+            let sessionHistory = sessionStorage.getItem('HistoryData');
+            sessionHistory = JSON.parse(sessionHistory);
+            sessionHistory = [];
+            sessionHistory = JSON.stringify(sessionHistory);
+            sessionStorage.setItem('HistoryData', sessionHistory);
+            $(".tableContainer .history .tableContent").html("");
+            $('.cover .tableContainerCenter .history .tableContent').html("");
+            localHistory = localStorage.getItem('HistoryData');
+            localHistory = JSON.parse(localHistory);
+            localHistory = [];
+            localHistory = JSON.stringify(localHistory);
+            localStorage.setItem('HistoryData', localHistory);
+
+            MyModule.displayTable(0, 'tableContainerCenter');
+
+            totalProfit = 0;
+            let dataTable = "<tr>";
+            dataTable += ("<td>Total Profit</td>");
+            dataTable += ("<td>--</td>");
+            dataTable += ("<td>--</td>");
+            dataTable += ("<td>" + totalProfit + "</td>");
+            dataTable += "<tr>";
+
+            $(".tableContainerCenter .tableContent").append(dataTable);  
+        })
+
         $('.cover').css('display', 'block');
         $('.tableContainer').css('display', 'none');
         MyModule.sortTable();
+        if(localHistory === undefined || localHistory === null)
+            localHistory = [];
         MyModule.displayTable(localHistory.length, 'tableContainerCenter');
 
         let totalProfit = 0;

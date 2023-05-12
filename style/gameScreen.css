@@ -205,7 +205,13 @@
     height: 100%;
 }
 
-.tableCloseBTN{
+.tableCloseBTN, .tableClearBTN{
     cursor: pointer;
     width: 100%;
+    font-weight: bold;
+}
+
+.tableClearBTN{
+    margin-top: 20px;
+    color: red;
 }

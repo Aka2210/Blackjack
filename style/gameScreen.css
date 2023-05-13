@@ -118,8 +118,8 @@
 
 .endScreen .game{
     position: fixed;
-    top: 200px;
-    right: 950px;
+    top: 50%;
+    right: 50%;
     cursor: pointer;
     width: 210px;
     height: 200px;
@@ -137,6 +137,7 @@
 }
 
 .endScreen .Blackjack{
+    transform: translate(-25%, -72%);
     width: 800px;
 }
 

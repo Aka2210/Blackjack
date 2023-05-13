@@ -67,9 +67,6 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
 
     MyModule.updateMoney();
 
-    MyModule.initCardDisplay(MyModule.Dealer);
-    MyModule.initCardDisplay(MyModule.Players[0]);
-
     MyModule.splitDetect(0);
     $('.bet img').css('transform', 'translateX(0px)')
     $('.bet img').on('mousedown', (e) => {
@@ -101,6 +98,9 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
             $('.gameButton').html('<div class= "Hit button">Hit</div><div class= "Stand button">Stand</div><div class= "Split button">Split</div><div class= "Double button">Double</div><div class= "Surrender button">Surrender</div>')
             $('.gameButton').css('font-size', '18px');
             $('.gameButton').css('font-weight', 'normal');
+
+            MyModule.initCardDisplay(MyModule.Dealer);
+            MyModule.initCardDisplay(MyModule.Players[0]);
         })
     })
 

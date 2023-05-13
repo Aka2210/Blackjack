@@ -223,9 +223,11 @@
     right: 0px;
     bottom: 190px;
     cursor: pointer;
+    z-index: 100;
 }
 
 .advertisement{
+    z-index: 100;
     cursor: pointer;
     transition: 1s;
     display: none;

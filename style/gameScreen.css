@@ -215,3 +215,24 @@
     margin-top: 20px;
     color: red;
 }
+
+.advertisementClose{
+    display: none;
+    position: fixed;
+    right: 0px;
+    bottom: 190px;
+    cursor: pointer;
+}
+
+.advertisement{
+    cursor: pointer;
+    transition: 1s;
+    display: none;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    width: 210px;
+    height: 210px;
+    background-image: url("/assets/images/background/advertisement1.png");
+    background-size: 100% 100%;
+}

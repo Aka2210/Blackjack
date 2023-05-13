@@ -76,16 +76,16 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
         let initx = e.clientX, max = 140, Bet = 0;
         $('body').on('mousemove', (event) => {
             $('.bet img').css('transform', 'translateX(' + (event.clientX - initx) + 'px)');
-            $('.betmoney').html('Put in ' + Math.floor(((event.clientX - initx) / 140) * MyModule.Information.money) + 'K chips');
+            $('.betmoney').html('Put in: ' + Math.floor(((event.clientX - initx) / 140) * MyModule.Information.money) + 'K chips');
             Bet = Math.floor(((event.clientX - initx) / 140) * MyModule.Information.money);
             if((event.clientX - initx) / 140 >= 1){
                 $('.bet img').css('transform', 'translateX(' + max + 'px)');
-                $('.betmoney').html('Put in' + MyModule.Information.money + 'K chips');
+                $('.betmoney').html('Put in: ' + MyModule.Information.money + 'K chips');
                 Bet = MyModule.Information.money;
                 MyModule.Player.bet = Bet;
             }
             if((event.clientX - initx) <= 0){
-                $('.betmoney').html('Put in:' + 1 + 'K chips');
+                $('.betmoney').html('Put in: ' + 1 + 'K chips');
                 $('.bet img').css('transform', 'translateX(0px)');
                 Bet = 1;
                 MyModule.Player.bet = Bet;
@@ -216,7 +216,7 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
                 $('.bet img').css('transform', 'translateX(' + (Math.floor(((MyModule.calculateTotalChips()) * 140) / (MyModule.Information.money + MyModule.Players[nowHand].bet))) + 'px)');
                 MyModule.Players.push(temp);
                 MyModule.splitCardChange(nowHand);
-                $('.betmoney').html('Put in:' + MyModule.calculateTotalChips() + 'K chips');
+                $('.betmoney').html('Put in: ' + MyModule.calculateTotalChips() + 'K chips');
             }
         }
         else if(e.target.className == 'Double button'){
@@ -227,7 +227,7 @@ $('.Blackjack').on('click', () => { //開始21點遊玩
                 MyModule.Information.money -= MyModule.Players[nowHand].bet;
                 MyModule.Players[nowHand].bet *= 2;
                 MyModule.updateMoney();
-                $('.betmoney').html('Put in:' + MyModule.calculateTotalChips() + 'K chips');
+                $('.betmoney').html('Put in: ' + MyModule.calculateTotalChips() + 'K chips');
 
                 MyModule.Players[nowHand].state = false;
                 MyModule.Players[nowHand].double = false;
